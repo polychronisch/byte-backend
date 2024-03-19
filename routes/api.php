@@ -27,4 +27,5 @@ Route::get('/candidates', [CandidateController::class, 'index']);
 //degrees
 Route::get('/degrees', [DegreeController::class, 'index']);
 Route::post('/submit-degree', [DegreeController::class, 'store']);
+Route::post('/delete-degree/{id}', [DegreeController::class, 'delete']);
 
