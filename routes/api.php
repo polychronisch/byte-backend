@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/submit-candidate', [CandidateController::class, 'store']);
+Route::get('/show-candidate/{id}', [CandidateController::class, 'show']);
 Route::post('/delete-candidate/{id}', [CandidateController::class, 'delete']);
+Route::post('/update-candidate/{id}', [CandidateController::class, 'update']);
 Route::get('/candidates', [CandidateController::class, 'index']);
 
 //degrees

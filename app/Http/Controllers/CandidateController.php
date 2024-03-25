@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use App\Http\Requests\CandidateRequest;
+use App\Http\Requests\CandidateUpdateRequest;
 
 class CandidateController extends Controller
 {
@@ -26,7 +27,28 @@ class CandidateController extends Controller
         return response()->json($candidates);
     }
 
-    public function delete($id){    
+    public function show($id)
+    {
+        $candidate = Candidate::join('degrees', 'candidates.degree_id', '=', 'degrees.id')
+        ->select('candidates.*', 'degrees.degreeTitle')->where('candidates.id',$id)
+        ->first(); // Retrieve all candidates
+        return response()->json($candidate);
+    }
+
+    public function delete($id)
+    {    
         Candidate::where('id', $id)->first()->delete();
+    }
+
+    public function update(CandidateUpdateRequest $request,$id)
+    {    
+        $candidate = Candidate::find($id);
+        if (!$candidate) {
+            return response()->json(['message' => 'Candidate not found'], 404);
+        }
+
+        $candidate->update($request->all());
+
+        return response()->json(['message' => 'Candidate updated successfully', 'candidate' => $candidate]);
     }
 }
