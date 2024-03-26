@@ -29,7 +29,7 @@ class CandidateRequest extends FormRequest
             'email' => 'required|email|unique:candidates,email',
             'mobile' => 'string|max:10',
             'degree_id' => 'required|integer',
-            'resume' => 'string', // Example validation for file upload (PDF, max size: 2MB)
+            'resume' => 'string',
         ];
     }
 }

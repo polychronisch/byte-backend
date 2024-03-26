@@ -23,7 +23,7 @@ class CandidateController extends Controller
     {
         $candidates = Candidate::join('degrees', 'candidates.degree_id', '=', 'degrees.id')
         ->select('candidates.*', 'degrees.degreeTitle')
-        ->get(); // Retrieve all candidates
+        ->get(); 
         return response()->json($candidates);
     }
 
@@ -31,7 +31,7 @@ class CandidateController extends Controller
     {
         $candidate = Candidate::join('degrees', 'candidates.degree_id', '=', 'degrees.id')
         ->select('candidates.*', 'degrees.degreeTitle')->where('candidates.id',$id)
-        ->first(); // Retrieve all candidates
+        ->first();
         return response()->json($candidate);
     }
 
